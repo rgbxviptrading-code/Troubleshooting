@@ -1,1 +1,14 @@
-
+{
+  "matching_urls": [
+    "#/wallet/Recharge",
+    "#/saasLottery/WinGo",
+    "#/saasLottery/TrxWinGo"
+  ],
+  "deposit_url": "https://kkeagle.com/#/",
+  "login_url": "https://kkeagle.com/#/login",
+  "register_url": "https://kkeagle.com/#/register?invitationCode=93022100566",
+  "telegram_url": "https://whatsapp.com/channel/0029VbBt5ZREFeXtTuSn320L",
+  "home_url": "https://kkeagle.com/#/",
+  "minimum_deposit": 300,
+  "minimum_deposit_number": 500
+}
