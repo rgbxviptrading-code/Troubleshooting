@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KK AI STUDIO Panel</title>
+    <script>
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            speechSynthesis.speak(utterance);
+        }
+
+        function handlePrediction() {
+            const predictionText = "Your prediction message goes here!";
+            speak(predictionText);
+        }
+    </script>
+</head>
+<body>
+    <h1>KK AI STUDIO Panel</h1>
+    <button onclick="handlePrediction()">Predict and Speak</button>
+</body>
+</html>
