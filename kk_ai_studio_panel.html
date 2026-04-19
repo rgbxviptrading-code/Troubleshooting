@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KK AI STUDIO Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .draggable { cursor: move; margin: 10px auto; padding: 20px; background-color: #e7f3fe; border: 1px solid #b8e0f1; border-radius: 5px; }
+        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        .output { margin-top: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #fff; }
+    </style>
+    <script>
+        function makeDraggable(evt) {
+            let selectedElement = evt.target;
+            const offset = {
+                x: evt.clientX - selectedElement.getBoundingClientRect().left,
+                y: evt.clientY - selectedElement.getBoundingClientRect().top
+            };
+
+            function dragMoveHandler(e) {
+                selectedElement.style.left = (e.clientX - offset.x) + 'px';
+                selectedElement.style.top = (e.clientY - offset.y) + 'px';
+            }
+
+            function dragEndHandler() {
+                document.removeEventListener('mousemove', dragMoveHandler);
+                document.removeEventListener('mouseup', dragEndHandler);
+            }
+
+            document.addEventListener('mousemove', dragMoveHandler);
+            document.addEventListener('mouseup', dragEndHandler);
+        }
+
+        function predictVoice() {
+            const message = "This is your prediction message.";
+            const utterance = new SpeechSynthesisUtterance(message);
+            window.speechSynthesis.speak(utterance);
+            document.getElementById('output').innerText = message;
+        }
+
+        function calculatePeriod(startDate, endDate) {
+            const diffMs = new Date(endDate) - new Date(startDate);
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            return diffDays;
+        }
+
+        function showPeriod() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const period = calculatePeriod(startDate, endDate);
+            document.getElementById('periodOutput').innerText = `Period is: ${period} days`;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>KK AI STUDIO Panel</h1>
+        <div class="draggable" onmousedown="makeDraggable(event)">
+            <h2>Prediction Voice Message</h2>
+            <button onclick="predictVoice()">Predict Voice Message</button>
+            <div class="output" id="output"></div>
+        </div>
+        <div class="draggable" onmousedown="makeDraggable(event)">
+            <h2>Period Calculation</h2>
+            <input type="date" id="startDate">
+            <input type="date" id="endDate">
+            <button onclick="showPeriod()">Calculate Period</button>
+            <div class="output" id="periodOutput"></div>
+        </div>
+    </div>
+</body>
+</html>
